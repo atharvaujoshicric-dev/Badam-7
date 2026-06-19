@@ -18,7 +18,6 @@
     --gold:         #d4a017;
     --gold-light:   #f0c040;
     --red-card:     #c0392b;
-    --white:        #ffffff;
     --card-bg:      #fdfaf4;
     --shadow:       0 4px 24px rgba(0,0,0,0.45);
     --radius:       16px;
@@ -68,7 +67,7 @@
     text-transform: uppercase;
   }
 
-  /* ── Screen container ── */
+  /* ── Screens ── */
   .screen {
     display: none;
     width: 100%;
@@ -83,7 +82,7 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── Card panel ── */
+  /* ── Panel ── */
   .panel {
     background: var(--green-table);
     border: 1px solid var(--green-felt);
@@ -99,7 +98,7 @@
     margin-bottom: 16px;
   }
 
-  /* ── Inputs ── */
+  /* ── Generic inputs ── */
   label {
     display: block;
     font-size: 0.78rem;
@@ -109,7 +108,7 @@
     letter-spacing: 0.06em;
     margin-bottom: 6px;
   }
-  input[type="number"], input[type="text"] {
+  .field-input {
     width: 100%;
     background: var(--green-deep);
     border: 1.5px solid var(--green-felt);
@@ -122,9 +121,26 @@
     transition: border-color 0.18s;
     margin-bottom: 14px;
     -webkit-appearance: none;
+    appearance: none;
   }
-  input:focus { border-color: var(--gold); }
-  input::placeholder { color: #5a7a6a; }
+  .field-input:focus { border-color: var(--gold); }
+  .field-input::placeholder { color: #5a7a6a; }
+
+  /* Player count big input */
+  #player-count-input {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 18px 14px;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .count-hint {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--cream-dim);
+    margin-bottom: 18px;
+  }
 
   /* ── Buttons ── */
   .btn {
@@ -137,54 +153,20 @@
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.1s, box-shadow 0.1s, opacity 0.15s;
+    transition: transform 0.1s, box-shadow 0.1s;
     letter-spacing: 0.02em;
+    margin-top: 10px;
   }
+  .btn:first-child { margin-top: 0; }
   .btn:active { transform: scale(0.97); }
-  .btn-primary {
-    background: var(--gold);
-    color: var(--green-deep);
-  }
+  .btn-primary  { background: var(--gold); color: var(--green-deep); }
   .btn-primary:hover { box-shadow: 0 0 0 3px #d4a01740; }
-  .btn-secondary {
-    background: var(--green-felt);
-    color: var(--cream);
-    margin-top: 10px;
-  }
-  .btn-danger {
-    background: var(--red-card);
-    color: #fff;
-    margin-top: 10px;
-  }
-  .btn + .btn { margin-top: 10px; }
+  .btn-secondary { background: var(--green-felt); color: var(--cream); }
+  .btn-danger   { background: var(--red-card); color: #fff; }
+  .btn-ghost    { background: transparent; color: var(--cream-dim);
+                  border: 1px solid var(--green-felt); font-size: 0.85rem; }
 
-  /* ── Player count selector ── */
-  .count-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  .count-btn {
-    aspect-ratio: 1;
-    border: 2px solid var(--green-felt);
-    border-radius: var(--radius-sm);
-    background: var(--green-deep);
-    color: var(--cream);
-    font-size: 1.3rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.15s;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .count-btn:hover, .count-btn.selected {
-    border-color: var(--gold);
-    background: #1b3a2a;
-    color: var(--gold);
-    box-shadow: 0 0 0 3px #d4a01730;
-  }
-
-  /* ── Score entry — card style ── */
+  /* ── Score rows ── */
   .score-row {
     display: flex;
     align-items: center;
@@ -196,18 +178,17 @@
     border: 1px solid #d4c9b0;
     box-shadow: 0 2px 8px rgba(0,0,0,0.18);
   }
-  .score-row .player-icon {
+  .player-icon {
     width: 36px; height: 36px;
     border-radius: 50%;
     background: var(--green-table);
     display: flex; align-items: center; justify-content: center;
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1rem; font-weight: 700;
     color: var(--gold);
     flex-shrink: 0;
     font-family: 'Playfair Display', serif;
   }
-  .score-row .player-name {
+  .player-name-label {
     flex: 1;
     font-weight: 600;
     color: var(--green-deep);
@@ -216,19 +197,25 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .score-row input[type="number"] {
+  .score-input {
     width: 80px;
-    margin: 0;
-    padding: 8px 10px;
-    font-size: 1rem;
+    padding: 8px 6px;
+    font-size: 1.05rem;
     text-align: center;
     border-radius: 8px;
     background: var(--green-deep);
     color: var(--cream);
     border: 1.5px solid var(--green-felt);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    flex-shrink: 0;
   }
+  .score-input:focus { border-color: var(--gold); }
 
-  /* ── Round history ── */
+  /* ── History table ── */
   .rounds-table {
     width: 100%;
     border-collapse: collapse;
@@ -244,14 +231,16 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    white-space: nowrap;
   }
   .rounds-table th:first-child { text-align: left; border-radius: 8px 0 0 0; }
-  .rounds-table th:last-child { border-radius: 0 8px 0 0; }
+  .rounds-table th:last-child  { border-radius: 0 8px 0 0; }
   .rounds-table td {
-    padding: 8px 8px;
+    padding: 8px;
     text-align: center;
     color: var(--cream);
     border-bottom: 1px solid #1f3d2d;
+    white-space: nowrap;
   }
   .rounds-table td:first-child { text-align: left; font-weight: 500; }
   .rounds-table tr:last-child td { border-bottom: none; }
@@ -267,8 +256,6 @@
     margin-bottom: 10px;
     background: var(--green-table);
     border: 1px solid var(--green-felt);
-    position: relative;
-    overflow: hidden;
   }
   .lb-row.rank-1 {
     background: linear-gradient(135deg, #2d4a1e, #1b4332);
@@ -277,47 +264,32 @@
   }
   .lb-rank {
     font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-weight: 800;
+    font-size: 1.4rem; font-weight: 800;
     color: var(--cream-dim);
-    width: 28px;
-    text-align: center;
-    flex-shrink: 0;
+    width: 28px; text-align: center; flex-shrink: 0;
   }
   .lb-row.rank-1 .lb-rank { color: var(--gold); font-size: 1.6rem; }
   .lb-trophy { font-size: 1.4rem; }
-  .lb-name {
-    flex: 1;
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--cream);
-  }
+  .lb-name { flex: 1; font-weight: 600; font-size: 1rem; color: var(--cream); }
   .lb-row.rank-1 .lb-name { color: var(--gold-light); font-size: 1.05rem; }
-  .lb-score {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--cream);
-    font-family: 'Playfair Display', serif;
-  }
+  .lb-score { font-size: 1.2rem; font-weight: 700; color: var(--cream);
+              font-family: 'Playfair Display', serif; }
   .lb-row.rank-1 .lb-score { color: var(--gold); font-size: 1.4rem; }
   .lb-pts { font-size: 0.7rem; color: var(--cream-dim); font-weight: 400; margin-left: 2px; }
 
-  /* ── Game round header ── */
+  /* ── Misc ── */
   .round-badge {
     display: inline-block;
     background: var(--green-deep);
     border: 1px solid var(--green-felt);
     border-radius: 999px;
-    font-size: 0.72rem;
-    font-weight: 600;
+    font-size: 0.72rem; font-weight: 600;
     color: var(--cream-dim);
     padding: 4px 12px;
     margin-bottom: 14px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
-
-  /* ── Running totals strip ── */
   .totals-strip {
     display: flex;
     gap: 8px;
@@ -334,17 +306,6 @@
     display: flex; align-items: center; gap: 6px;
   }
   .total-chip strong { color: var(--gold); }
-
-  /* ── Divider ── */
-  .divider {
-    border: none;
-    border-top: 1px solid var(--green-felt);
-    margin: 18px 0;
-  }
-
-  .text-center { text-align: center; }
-  .mt-4 { margin-top: 16px; }
-  .text-muted { color: var(--cream-dim); font-size: 0.85rem; }
   .winner-banner {
     font-family: 'Playfair Display', serif;
     font-size: 1rem;
@@ -356,11 +317,50 @@
     border-radius: var(--radius-sm);
     margin-bottom: 20px;
   }
-  .suit-deco {
-    font-size: 0.9rem;
-    opacity: 0.5;
-    margin: 0 4px;
+  .suit-deco { font-size: 0.9rem; opacity: 0.5; margin: 0 4px; }
+  .divider { border: none; border-top: 1px solid var(--green-felt); margin: 16px 0; }
+
+  /* ── Modal ── */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 200;
+    align-items: center; justify-content: center;
+    padding: 20px;
   }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--green-table);
+    border: 1px solid var(--green-felt);
+    border-radius: var(--radius);
+    padding: 28px 22px;
+    width: 100%; max-width: 340px;
+    box-shadow: var(--shadow);
+    animation: fadeUp 0.22s ease both;
+  }
+  .modal-box h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--red-card);
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+  .modal-box p {
+    font-size: 0.88rem;
+    color: var(--cream-dim);
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+  .modal-box p strong { color: var(--cream); }
+  .modal-error {
+    font-size: 0.8rem;
+    color: var(--red-card);
+    margin-top: -10px;
+    margin-bottom: 12px;
+    min-height: 18px;
+  }
+  .modal-btns { display: flex; gap: 10px; }
+  .modal-btns .btn { margin-top: 0; }
 </style>
 </head>
 <body>
@@ -370,20 +370,20 @@
   <p>Card Score Tracker</p>
 </header>
 
-<!-- ══════════════════════════════════════
-     SCREEN 1 · Player Count
-══════════════════════════════════════ -->
+<!-- ══ SCREEN 1 · Player Count ══ -->
 <div class="screen active" id="screen-count">
   <div class="panel">
     <p class="panel-title">How many players?</p>
-    <div class="count-grid" id="count-grid"></div>
+    <label for="player-count-input">Number of players</label>
+    <input class="field-input" type="number" id="player-count-input"
+           min="2" max="20" placeholder="e.g. 4"
+           inputmode="numeric" pattern="[0-9]*" />
+    <p class="count-hint">Enter any number between 2 and 20</p>
     <button class="btn btn-primary" onclick="goToNames()">Continue →</button>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     SCREEN 2 · Player Names
-══════════════════════════════════════ -->
+<!-- ══ SCREEN 2 · Player Names ══ -->
 <div class="screen" id="screen-names">
   <div class="panel">
     <p class="panel-title">Enter player names</p>
@@ -393,22 +393,17 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     SCREEN 3 · Score Entry
-══════════════════════════════════════ -->
+<!-- ══ SCREEN 3 · Score Entry ══ -->
 <div class="screen" id="screen-score">
   <div id="round-badge-wrap"></div>
-
-  <!-- Running totals -->
   <div class="totals-strip" id="totals-strip"></div>
 
   <div class="panel">
-    <p class="panel-title">Enter scores for this round</p>
+    <p class="panel-title">Scores for this round</p>
     <div id="score-fields"></div>
     <button class="btn btn-primary" onclick="saveRound()">Save Round ✓</button>
   </div>
 
-  <!-- Round history -->
   <div class="panel" id="history-panel" style="display:none">
     <p class="panel-title">Round History</p>
     <div style="overflow-x:auto">
@@ -418,21 +413,20 @@
 
   <div class="panel">
     <button class="btn btn-secondary" onclick="addRound()">+ Add Another Round</button>
-    <button class="btn btn-danger" onclick="endGame()">🏆 End Game & See Results</button>
-    <button class="btn btn-secondary" onclick="confirmReset()" style="margin-top:14px;opacity:0.6;font-size:0.85rem">↺ Reset Everything</button>
+    <button class="btn btn-danger" onclick="endGame()">🏆 End Game &amp; See Results</button>
+    <hr class="divider" />
+    <button class="btn btn-ghost" onclick="openResetModal()">↺ Reset Everything</button>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     SCREEN 4 · Leaderboard
-══════════════════════════════════════ -->
+<!-- ══ SCREEN 4 · Leaderboard ══ -->
 <div class="screen" id="screen-results">
   <div class="panel">
     <div class="winner-banner" id="winner-banner"></div>
     <div id="leaderboard"></div>
   </div>
 
-  <div class="panel" style="display:none" id="final-history-panel">
+  <div class="panel" id="final-history-panel">
     <p class="panel-title">All Rounds</p>
     <div style="overflow-x:auto">
       <table class="rounds-table" id="final-rounds-table"></table>
@@ -441,27 +435,50 @@
 
   <div class="panel">
     <button class="btn btn-primary" onclick="playAgain()">🃏 New Game (Same Players)</button>
-    <button class="btn btn-secondary" onclick="confirmReset()">↺ Reset Everything</button>
+    <button class="btn btn-secondary" onclick="newGameNewPlayers()">👥 New Game (New Players)</button>
+    <hr class="divider" />
+    <button class="btn btn-ghost" onclick="openResetModal()">↺ Reset Everything</button>
+  </div>
+</div>
+
+<!-- ══ Reset Modal ══ -->
+<div class="modal-overlay" id="reset-modal" onclick="closeResetModalIfOutside(event)">
+  <div class="modal-box">
+    <h2>⚠️ Reset Everything?</h2>
+    <p>This will delete all scores and player data permanently.<br/>
+       Type <strong>Reset</strong> to confirm.</p>
+    <label for="reset-password">Confirmation word</label>
+    <input class="field-input" type="text" id="reset-password"
+           placeholder="Type Reset here" autocomplete="off"
+           oninput="document.getElementById('reset-error').textContent=''" />
+    <p class="modal-error" id="reset-error"></p>
+    <div class="modal-btns">
+      <button class="btn btn-secondary" onclick="closeResetModal()" style="flex:1">Cancel</button>
+      <button class="btn btn-danger" onclick="doReset()" style="flex:1">Reset</button>
+    </div>
   </div>
 </div>
 
 <script>
-// ══════════════════════════════════════
+// ═══════════════════════════════
 // STATE
-// ══════════════════════════════════════
-const LS_KEY = 'badam7_state';
+// ═══════════════════════════════
+const LS_KEY = 'badam7_v2';
 
-let state = loadState() || {
-  phase: 'count',      // count | names | scoring | results
-  numPlayers: 0,
-  players: [],         // [{ name, rounds:[], total }]
-  currentRound: 1,
-  currentScores: {},   // temp scores being entered
-};
+let state = loadState() || freshState();
 
-// ══════════════════════════════════════
+function freshState() {
+  return {
+    phase: 'count',
+    numPlayers: 0,
+    players: [],      // { name, rounds:[], total }
+    currentScores: {} // { playerIndex: rawValue } — temp, not yet saved
+  };
+}
+
+// ═══════════════════════════════
 // PERSISTENCE
-// ══════════════════════════════════════
+// ═══════════════════════════════
 function saveState() {
   try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch(e) {}
 }
@@ -475,23 +492,29 @@ function clearState() {
   try { localStorage.removeItem(LS_KEY); } catch(e) {}
 }
 
-// ══════════════════════════════════════
-// SCREEN ROUTING
-// ══════════════════════════════════════
+// ═══════════════════════════════
+// ROUTING
+// ═══════════════════════════════
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  const el = document.getElementById(id);
+  el.classList.add('active');
+  // re-trigger animation
+  el.style.animation = 'none';
+  el.offsetHeight; // reflow
+  el.style.animation = '';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function restoreFromState() {
   if (state.phase === 'count') {
-    buildCountGrid();
     showScreen('screen-count');
+    if (state.numPlayers >= 2) {
+      document.getElementById('player-count-input').value = state.numPlayers;
+    }
   } else if (state.phase === 'names') {
-    buildCountGrid();
-    showScreen('screen-count');
-    goToNames();
+    showScreen('screen-names');
+    buildNameFields();
   } else if (state.phase === 'scoring') {
     buildScoreScreen();
     showScreen('screen-score');
@@ -501,29 +524,20 @@ function restoreFromState() {
   }
 }
 
-// ══════════════════════════════════════
+// ═══════════════════════════════
 // SCREEN 1 — Count
-// ══════════════════════════════════════
-function buildCountGrid() {
-  const grid = document.getElementById('count-grid');
-  grid.innerHTML = '';
-  for (let i = 2; i <= 8; i++) {
-    const b = document.createElement('button');
-    b.className = 'count-btn' + (state.numPlayers === i ? ' selected' : '');
-    b.textContent = i;
-    b.onclick = () => {
-      state.numPlayers = i;
-      document.querySelectorAll('.count-btn').forEach(x => x.classList.remove('selected'));
-      b.classList.add('selected');
-    };
-    grid.appendChild(b);
-  }
-}
-
+// ═══════════════════════════════
 function goToNames() {
-  if (!state.numPlayers) {
-    alert('Please select number of players.');
+  const raw = document.getElementById('player-count-input').value.trim();
+  const n = parseInt(raw, 10);
+  if (!raw || isNaN(n) || n < 2 || n > 20) {
+    alert('Please enter a number of players between 2 and 20.');
     return;
+  }
+  state.numPlayers = n;
+  // If re-visiting and player count changed, reset existing player list
+  if (state.players.length !== n) {
+    state.players = [];
   }
   state.phase = 'names';
   buildNameFields();
@@ -531,24 +545,38 @@ function goToNames() {
   saveState();
 }
 
-// ══════════════════════════════════════
+// ═══════════════════════════════
 // SCREEN 2 — Names
-// ══════════════════════════════════════
+// ═══════════════════════════════
 function buildNameFields() {
   const wrap = document.getElementById('name-fields');
   wrap.innerHTML = '';
   for (let i = 0; i < state.numPlayers; i++) {
-    const val = state.players[i] ? state.players[i].name : '';
+    const savedName = state.players[i] ? state.players[i].name : '';
     const lbl = document.createElement('label');
+    lbl.setAttribute('for', `pname-${i}`);
     lbl.textContent = `Player ${i + 1}`;
     const inp = document.createElement('input');
+    inp.className = 'field-input';
     inp.type = 'text';
     inp.placeholder = `Player ${i + 1} name`;
-    inp.value = val;
+    inp.value = savedName;
     inp.id = `pname-${i}`;
     inp.setAttribute('autocomplete', 'off');
+    // Allow Enter key to move to next field
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const next = document.getElementById(`pname-${i + 1}`);
+        if (next) next.focus(); else startGame();
+      }
+    });
     wrap.appendChild(lbl);
     wrap.appendChild(inp);
+  }
+  // Focus first empty field
+  for (let i = 0; i < state.numPlayers; i++) {
+    const inp = document.getElementById(`pname-${i}`);
+    if (!inp.value) { inp.focus(); break; }
   }
 }
 
@@ -556,11 +584,16 @@ function startGame() {
   const players = [];
   for (let i = 0; i < state.numPlayers; i++) {
     const inp = document.getElementById(`pname-${i}`);
-    const name = (inp.value || '').trim() || `Player ${i + 1}`;
-    players.push({ name, rounds: [], total: 0 });
+    const name = (inp ? inp.value.trim() : '') || `Player ${i + 1}`;
+    // Preserve existing round data if player is the same
+    const existing = state.players[i];
+    if (existing && existing.name === name) {
+      players.push(existing);
+    } else {
+      players.push({ name, rounds: [], total: 0 });
+    }
   }
   state.players = players;
-  state.currentRound = 1;
   state.currentScores = {};
   state.phase = 'scoring';
   buildScoreScreen();
@@ -568,69 +601,106 @@ function startGame() {
   saveState();
 }
 
-// ══════════════════════════════════════
+// ═══════════════════════════════
 // SCREEN 3 — Score Entry
-// ══════════════════════════════════════
-function buildScoreScreen() {
-  // Badge
-  document.getElementById('round-badge-wrap').innerHTML =
-    `<span class="round-badge">♠ Round ${state.currentRound} ♣</span>`;
+// ═══════════════════════════════
+function currentRoundNumber() {
+  // The round being entered is always one more than rounds already saved
+  return (state.players[0] ? state.players[0].rounds.length : 0) + 1;
+}
 
-  // Totals strip
+function buildScoreScreen() {
+  // Round badge — reflects actual next round number
+  document.getElementById('round-badge-wrap').innerHTML =
+    `<span class="round-badge">♠ Round ${currentRoundNumber()} ♣</span>`;
+
+  // Running totals
   const strip = document.getElementById('totals-strip');
   strip.innerHTML = state.players.map(p =>
-    `<div class="total-chip"><span>${p.name.split(' ')[0]}</span> <strong>${p.total}</strong></div>`
+    `<div class="total-chip"><span>${escHtml(p.name.split(' ')[0])}</span><strong>${p.total}</strong></div>`
   ).join('');
 
   // Score inputs
   const fields = document.getElementById('score-fields');
   fields.innerHTML = '';
   state.players.forEach((p, i) => {
+    const savedVal = state.currentScores[i] !== undefined ? state.currentScores[i] : '';
     const row = document.createElement('div');
     row.className = 'score-row';
-    row.innerHTML = `
-      <div class="player-icon">${p.name[0].toUpperCase()}</div>
-      <div class="player-name">${p.name}</div>
-      <input type="number" id="score-${i}" min="0" placeholder="0"
-             value="${state.currentScores[i] !== undefined ? state.currentScores[i] : ''}"
-             oninput="state.currentScores[${i}]=this.value" />
-    `;
+
+    const icon = document.createElement('div');
+    icon.className = 'player-icon';
+    icon.textContent = p.name[0].toUpperCase();
+
+    const nameEl = document.createElement('div');
+    nameEl.className = 'player-name-label';
+    nameEl.textContent = p.name;
+
+    const inp = document.createElement('input');
+    inp.type = 'number';
+    inp.className = 'score-input';
+    inp.id = `score-${i}`;
+    inp.min = '0';
+    inp.placeholder = '0';
+    inp.value = savedVal;
+    inp.inputMode = 'numeric';
+    inp.addEventListener('input', () => { state.currentScores[i] = inp.value; });
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const next = document.getElementById(`score-${i + 1}`);
+        if (next) next.focus(); else saveRound();
+      }
+    });
+
+    row.appendChild(icon);
+    row.appendChild(nameEl);
+    row.appendChild(inp);
     fields.appendChild(row);
   });
 
-  // History table
   renderHistory();
 }
 
 function renderHistory() {
-  const hasRounds = state.players[0] && state.players[0].rounds.length > 0;
+  const hasRounds = state.players.length > 0 && state.players[0].rounds.length > 0;
   document.getElementById('history-panel').style.display = hasRounds ? '' : 'none';
   if (!hasRounds) return;
+  document.getElementById('rounds-table').innerHTML = buildHistoryHTML(state.players);
+}
 
-  const tbl = document.getElementById('rounds-table');
-  const numRounds = state.players[0].rounds.length;
+function buildHistoryHTML(players) {
+  const numRounds = players[0].rounds.length;
   let html = '<thead><tr><th>Player</th>';
   for (let r = 1; r <= numRounds; r++) html += `<th>R${r}</th>`;
   html += '<th>Total</th></tr></thead><tbody>';
-  state.players.forEach(p => {
-    html += `<tr><td>${p.name}</td>`;
+  players.forEach(p => {
+    html += `<tr><td>${escHtml(p.name)}</td>`;
     p.rounds.forEach(s => html += `<td>${s}</td>`);
     html += `<td><strong>${p.total}</strong></td></tr>`;
   });
-  html += '</tbody>';
-  tbl.innerHTML = html;
+  return html + '</tbody>';
 }
 
 function saveRound() {
+  // Collect & validate — must have a value for every player
   const scores = [];
-  let allFilled = true;
-  state.players.forEach((_, i) => {
+  let firstMissing = -1;
+  for (let i = 0; i < state.players.length; i++) {
     const inp = document.getElementById(`score-${i}`);
-    const val = inp ? inp.value.trim() : '';
-    if (val === '') { allFilled = false; } else { scores.push(parseInt(val, 10) || 0); }
-  });
-  if (!allFilled) { alert('Please enter scores for all players.'); return; }
-
+    const raw = inp ? inp.value.trim() : '';
+    if (raw === '') {
+      if (firstMissing === -1) firstMissing = i;
+      scores.push(null);
+    } else {
+      scores.push(Math.max(0, parseInt(raw, 10) || 0));
+    }
+  }
+  if (firstMissing !== -1) {
+    alert(`Please enter a score for ${state.players[firstMissing].name}.`);
+    document.getElementById(`score-${firstMissing}`).focus();
+    return;
+  }
+  // Commit scores
   state.players.forEach((p, i) => {
     p.rounds.push(scores[i]);
     p.total += scores[i];
@@ -641,18 +711,19 @@ function saveRound() {
 }
 
 function addRound() {
-  state.currentRound++;
+  // currentScores cleared so inputs are fresh
   state.currentScores = {};
   buildScoreScreen();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // No need to change any round counter — currentRoundNumber() derives it
   saveState();
 }
 
-// ══════════════════════════════════════
+// ═══════════════════════════════
 // SCREEN 4 — Results
-// ══════════════════════════════════════
+// ═══════════════════════════════
 function endGame() {
-  if (state.players[0].rounds.length === 0) {
+  if (!state.players[0] || state.players[0].rounds.length === 0) {
     alert('Save at least one round before ending the game.');
     return;
   }
@@ -665,47 +736,31 @@ function endGame() {
 function buildResults() {
   const sorted = [...state.players].sort((a, b) => a.total - b.total);
 
-  // Winner banner
   document.getElementById('winner-banner').innerHTML =
-    `🏆 Winner: <strong>${sorted[0].name}</strong> with ${sorted[0].total} pts <span class="suit-deco">♠ ♥ ♦ ♣</span>`;
+    `🏆 Winner: <strong>${escHtml(sorted[0].name)}</strong> — ${sorted[0].total} pts <span class="suit-deco">♠ ♥ ♦ ♣</span>`;
 
-  // Leaderboard
-  const lb = document.getElementById('leaderboard');
-  lb.innerHTML = sorted.map((p, i) => {
-    const trophy = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
-    return `
-      <div class="lb-row${i === 0 ? ' rank-1' : ''}">
-        <div class="lb-rank">${i + 1}</div>
-        ${trophy ? `<div class="lb-trophy">${trophy}</div>` : ''}
-        <div class="lb-name">${p.name}</div>
-        <div class="lb-score">${p.total}<span class="lb-pts">pts</span></div>
-      </div>`;
+  document.getElementById('leaderboard').innerHTML = sorted.map((p, i) => {
+    const trophy = ['🥇','🥈','🥉'][i] || '';
+    return `<div class="lb-row${i === 0 ? ' rank-1' : ''}">
+      <div class="lb-rank">${i + 1}</div>
+      ${trophy ? `<div class="lb-trophy">${trophy}</div>` : '<div style="width:24px"></div>'}
+      <div class="lb-name">${escHtml(p.name)}</div>
+      <div class="lb-score">${p.total}<span class="lb-pts">pts</span></div>
+    </div>`;
   }).join('');
 
-  // Full history
-  const hasRounds = state.players[0] && state.players[0].rounds.length > 0;
   const fhp = document.getElementById('final-history-panel');
-  fhp.style.display = hasRounds ? '' : 'none';
-  if (hasRounds) {
-    const numRounds = state.players[0].rounds.length;
-    const tbl = document.getElementById('final-rounds-table');
-    let html = '<thead><tr><th>Player</th>';
-    for (let r = 1; r <= numRounds; r++) html += `<th>R${r}</th>`;
-    html += '<th>Total</th></tr></thead><tbody>';
-    state.players.forEach(p => {
-      html += `<tr><td>${p.name}</td>`;
-      p.rounds.forEach(s => html += `<td>${s}</td>`);
-      html += `<td><strong>${p.total}</strong></td></tr>`;
-    });
-    html += '</tbody>';
-    tbl.innerHTML = html;
+  if (state.players[0] && state.players[0].rounds.length > 0) {
+    fhp.style.display = '';
+    document.getElementById('final-rounds-table').innerHTML = buildHistoryHTML(state.players);
+  } else {
+    fhp.style.display = 'none';
   }
 }
 
 function playAgain() {
-  // Keep players, reset scores
-  state.players = state.players.map(p => ({ ...p, rounds: [], total: 0 }));
-  state.currentRound = 1;
+  // Same players, reset all scores
+  state.players = state.players.map(p => ({ name: p.name, rounds: [], total: 0 }));
   state.currentScores = {};
   state.phase = 'scoring';
   buildScoreScreen();
@@ -713,19 +768,54 @@ function playAgain() {
   saveState();
 }
 
-function confirmReset() {
-  if (confirm('Reset everything and start fresh?')) {
-    clearState();
-    state = { phase: 'count', numPlayers: 0, players: [], currentRound: 1, currentScores: {} };
-    buildCountGrid();
-    showScreen('screen-count');
-  }
+function newGameNewPlayers() {
+  state = freshState();
+  clearState();
+  showScreen('screen-count');
+  document.getElementById('player-count-input').value = '';
 }
 
-// ══════════════════════════════════════
+// ═══════════════════════════════
+// RESET MODAL
+// ═══════════════════════════════
+function openResetModal() {
+  document.getElementById('reset-password').value = '';
+  document.getElementById('reset-error').textContent = '';
+  document.getElementById('reset-modal').classList.add('open');
+  setTimeout(() => document.getElementById('reset-password').focus(), 100);
+}
+function closeResetModal() {
+  document.getElementById('reset-modal').classList.remove('open');
+}
+function closeResetModalIfOutside(e) {
+  if (e.target === document.getElementById('reset-modal')) closeResetModal();
+}
+function doReset() {
+  const val = document.getElementById('reset-password').value.trim();
+  if (val !== 'Reset') {
+    document.getElementById('reset-error').textContent = 'Incorrect — type exactly: Reset';
+    document.getElementById('reset-password').focus();
+    return;
+  }
+  closeResetModal();
+  clearState();
+  state = freshState();
+  showScreen('screen-count');
+  document.getElementById('player-count-input').value = '';
+}
+
+// ═══════════════════════════════
+// UTILS
+// ═══════════════════════════════
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ═══════════════════════════════
 // INIT
-// ══════════════════════════════════════
-buildCountGrid();
+// ═══════════════════════════════
 restoreFromState();
 </script>
 </body>
